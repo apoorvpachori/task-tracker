@@ -1,24 +1,28 @@
 {
-    "tasks": [
+  "tasks": [
     {
-        "id":"1",
-        "text": "Doctors Appointment",
-        "day": "Feb 5th",
-        "reminder": true
+      "id": "2",
+      "text": "Meeting",
+      "day": "Feb 6th",
+      "reminder": true
     },
     {
-        "id":"2",
-        "text": "Meeting",
-        "day": "Feb 6th",
-        "reminder": true
+      "id": "3",
+      "text": "Food Shopping",
+      "day": "Feb 7th",
+      "reminder": true
     },
     {
-        "id":"3",
-        "text": "Food Shopping",
-        "day": "Feb 7th",
-        "reminder": false
+      "text": "hello",
+      "day": "hello",
+      "reminder": true,
+      "id": "mvQLyUk"
+    },
+    {
+      "text": "hehe adding to server",
+      "day": "adding to the server what it doo baby",
+      "reminder": false,
+      "id": "TGD94Ym"
     }
-    
   ]
-
 }
