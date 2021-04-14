@@ -21,14 +21,14 @@ function App() {
     },[])
 
   const fetchTasks = async () => {
-    const res = await fetch('http://localhost:5000/tasks')
+    const res = await fetch('http://localhost:5001/')
     const data = await res.json()
-
+    console.log(typeof data);
     return data
   }
 
   const fetchTask = async (id) => {
-    const res = await fetch(`http://localhost:5000/tasks/${id}`)
+    const res = await fetch(`http://localhost:5001/${id}`)
     const data = await res.json()
 
     return data
@@ -37,7 +37,7 @@ function App() {
 //add task
   const addTask = async (task) => {
 
-    const res = await fetch('http://localhost:5000/tasks', {
+    const res = await fetch('http://localhost:5001/', {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       headers: {
         'Content-Type': 'application/json'
