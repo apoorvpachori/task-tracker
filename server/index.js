@@ -1,14 +1,34 @@
 const express = require("express");
-
+const mongoose = require('mongoose');
+const tasks = require('./routes/api/tasks');
 const PORT = process.env.PORT || 5001;
-
 const app = express();
+
+
+app.use(express.json());
+
+//DB config
+
+const db = require('./config/keys').mongoURI;
+
+//connect to our mongo db
+
+mongoose
+  .connect(db,
+    { useNewUrlParser: true,
+      useUnifiedTopology: true
+     } 
+    )
+  .then(() => {console.log('Mongo DB connected...');})
+  .catch(err => console.log(err));
+
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
+app.use('/api/tasks',tasks);
 
 app.get("/", (req, res) => {
   const tasks = 
