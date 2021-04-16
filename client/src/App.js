@@ -28,7 +28,7 @@ function App() {
   }
 
   const fetchTask = async (id) => {
-    const res = await fetch(`http://localhost:5001/${id}`)
+    const res = await fetch(`http://localhost:5001/api/${id}`)
     const data = await res.json()
 
     return data
@@ -37,7 +37,8 @@ function App() {
 //add task
   const addTask = async (task) => {
 
-    const res = await fetch('http://localhost:5001/', {
+    console.log(JSON.stringify(task));
+    const res = await fetch('http://localhost:5001/api/tasks', {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       headers: {
         'Content-Type': 'application/json'
@@ -46,23 +47,18 @@ function App() {
     })
 
     const data = await res.json()
-
+    console.log(data);
     setTasks([...tasks, data])
-
-    // const id = Math.floor(Math.random()*10000) + 3
-
-    // const newTask = {id, ...task}
-
-    // setTasks([...tasks,newTask])
   }
   //Delete Task
 
   const deleteTask = async (id) => {
-    await fetch(`http://localhost:5000/tasks/${id}`,{
-      method: 'DELETE',
+    console.log(`trying to delete id ${id}`);
+    const res = await fetch(`http://localhost:5001/api/tasks/${id}`,{
+      method: 'DELETE'
     })
-    
-    setTasks(tasks.filter((task) => task.id !== id))
+    console.log(res);
+    setTasks(tasks.filter((task) => task._id !== id))
 
   }
 
@@ -70,7 +66,7 @@ function App() {
   const toggleReminder = async (id) => {
     const taskToToggle = await fetchTask(id)
     const updTask = {...taskToToggle, reminder: !taskToToggle.reminder}
-    const res = await fetch(`http://localhost:5000/tasks/${id}`,{
+    const res = await fetch(`http://localhost:5001/tasks/${id}`,{
       method:'PUT',
       headers: {
         'Content-type':'application/json'
