@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require('mongoose');
 const tasks = require('./routes/api/tasks');
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 5001;
 const app = express();
 const cors = require('cors');
 const path = require('path');
@@ -30,14 +30,18 @@ mongoose
 // });
 
 app.use('/api/tasks',tasks);
-
-//serve our statis assets if in production
-
-if(process.env.NODE_ENV === 'production')
+app.get('/',(req,res)=>
 {
-  app.use(express.static('client/build'));
-}
+  console.log('hello');
+  console.log(__dirname);
+  console.log(path.resolve(__dirname,'client','build','index.html'));
+})
+//serve our statis assets if in production
+if(process.env.NODE_ENV==='production')
+{
+  app.use(express.static('client/build'))
 
+}
 
   app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
