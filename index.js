@@ -32,14 +32,16 @@ mongoose
 app.use('/api/tasks',tasks);
 app.get('/',(req,res)=>
 {
+  console.log('in production')
+  app.use(express.static('client/build'))
   console.log('hello');
   console.log(__dirname);
-  console.log(path.resolve(__dirname,'client','build','index.html'));
+  res.sendFile(path.resolve(__dirname,'client','build','index.html'));
 })
 //serve our statis assets if in production
 if(process.env.NODE_ENV==='production')
 {
-  app.use(express.static('client/build'))
+
 
 }
 
