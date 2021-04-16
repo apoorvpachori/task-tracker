@@ -4,7 +4,7 @@ const tasks = require('./routes/api/tasks');
 const PORT = process.env.PORT || 5001;
 const app = express();
 const cors = require('cors');
-
+const path = require('path');
 
 app.use(express.json());
 app.use(cors())
@@ -31,30 +31,15 @@ mongoose
 
 app.use('/api/tasks',tasks);
 
-app.get("/", (req, res) => {
-  const tasks = 
- [
-      {
-        "id": "2",
-        "text": "Meeting",
-        "day": "Feb 6th",
-        "reminder": true
-      },
-      {
-        "id": "3",
-        "text": "Food Shopping",
-        "day": "Feb 7th",
-        "reminder": true
-      },
-      {
-        "text": "hello",
-        "day": "hello",
-        "reminder": true,
-        "id": "mvQLyUk"
-      }
-    ]
-    res.json(tasks);
-  });
+//serve our statis assets if in production
+
+if(process.env.NODE_ENV === 'production')
+{
+  app.use(express.static('client/build'));
+  app.get('*',(req,res) => {
+    res.sendFile(path.resolve(__dirname,'client','build','index.html'));
+  })
+}
 
 
   app.listen(PORT, () => {
