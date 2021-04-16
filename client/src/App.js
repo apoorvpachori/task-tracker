@@ -37,7 +37,6 @@ function App() {
 //add task
   const addTask = async (task) => {
 
-    console.log(JSON.stringify(task));
     const res = await fetch('http://localhost:5001/api/tasks', {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       headers: {
@@ -47,13 +46,11 @@ function App() {
     })
 
     const data = await res.json()
-    console.log(data);
     setTasks([...tasks, data])
   }
   //Delete Task
 
   const deleteTask = async (id) => {
-    console.log(`trying to delete id ${id}`);
     const res = await fetch(`http://localhost:5001/api/tasks/${id}`,{
       method: 'DELETE'
     })
@@ -92,7 +89,6 @@ function App() {
             }
           </>
         )} />
-
         <Route path='/about' component={About}/>
         <Footer />
       </div>
