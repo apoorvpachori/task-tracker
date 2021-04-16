@@ -21,14 +21,14 @@ function App() {
     },[])
 
   const fetchTasks = async () => {
-    const res = await fetch('http://localhost:5001/api/tasks')
+    const res = await fetch(`http://localhost:${process.env.PORT || 8080}/api/tasks`)
     const data = await res.json()
     console.log(typeof data);
     return data
   }
 
   const fetchTask = async (id) => {
-    const res = await fetch(`http://localhost:5001/api/${id}`)
+    const res = await fetch(`http://localhost:${process.env.PORT || 8080}/api/${id}`)
     const data = await res.json()
 
     return data
@@ -37,7 +37,7 @@ function App() {
 //add task
   const addTask = async (task) => {
 
-    const res = await fetch('http://localhost:5001/api/tasks', {
+    const res = await fetch(`http://localhost:${process.env.PORT || 8080}/api/tasks`, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       headers: {
         'Content-Type': 'application/json'
@@ -51,7 +51,7 @@ function App() {
   //Delete Task
 
   const deleteTask = async (id) => {
-    const res = await fetch(`http://localhost:5001/api/tasks/${id}`,{
+    const res = await fetch(`http://localhost:${process.env.PORT || 8080}/api/tasks/${id}`,{
       method: 'DELETE'
     })
     console.log(res);
@@ -63,7 +63,7 @@ function App() {
   const toggleReminder = async (id) => {
     const taskToToggle = await fetchTask(id)
     const updTask = {...taskToToggle, reminder: !taskToToggle.reminder}
-    const res = await fetch(`http://localhost:5001/tasks/${id}`,{
+    const res = await fetch(`http://localhost:${process.env.PORT || 8080}/tasks/${id}`,{
       method:'PUT',
       headers: {
         'Content-type':'application/json'
